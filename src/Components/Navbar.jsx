@@ -29,7 +29,7 @@ const Navbar = () => {
                     <Link to="/" className="hover:underline">
                         Home
                     </Link>
-                    <Link to="/available-camps" className="hover:underline">
+                    <Link to="/available" className="hover:underline">
                         Available Camps
                     </Link>
                     {/* {!user && (
