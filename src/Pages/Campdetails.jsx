@@ -16,7 +16,7 @@ const Campdetails = () => {
         emergencyContact: "",
     });
 
-    // Fetch camp details
+
     useEffect(() => {
         axios.get(`http://localhost:5000/camps/${id}`)
             .then(response => {
