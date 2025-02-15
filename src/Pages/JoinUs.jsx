@@ -1,10 +1,12 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authcontext } from '../Authprovider/Authprovider';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const JoinUs = () => {
     const { user, setUser, signinuser, signinwithGoogle, setLoading } = useContext(authcontext);
-    // console.log(user);
+    console.log(user);
     const navigate = useNavigate()
     const handlelogin = e => {
         e.preventDefault()
@@ -15,8 +17,8 @@ const JoinUs = () => {
         signinuser(email, password)
             .then(result => {
                 setUser(result.user)
-                toast.success('Logged in succefully')
                 setLoading(false)
+                toast.success('Logged in succefully')
                 navigate('/')
             })
             .catch(error => {
@@ -24,19 +26,31 @@ const JoinUs = () => {
                 toast.error('Please Enter valid Email password')
             })
     }
-    const handlegooglesignin = () => {
-        signinwithGoogle()
-            .then(result => {
-                setUser(result.user)
-                setLoading(false)
-                navigate('/')
-                toast.success('succefully log in')
-            })
-            .catch(error => {
-                // console.log(error);
-                toast.error('failed to login')
-            })
-    }
+    const handlegooglesignin = async () => {
+        try {
+            const result = await signinwithGoogle();
+            const { displayName: name, email, photoURL: photo } = result.user;
+            const role = 'participant';
+            const rdata = { name, email, role, photo };
+
+            // Sending user data to the database
+            const response = await axios.post('http://localhost:5000/sign', rdata);
+
+            if (response.status === 200 || response.status === 201) {
+                setUser(result.user);
+                setLoading(false);
+                toast.success('Successfully logged in');
+                navigate('/');
+            } else {
+                toast.error('Failed to save user data. Please try again.');
+                return;
+            }
+        } catch (error) {
+            console.error('Error during Google Sign-in:', error);
+            toast.error('Google Sign-in failed. Please try again.');
+            return; // Prevent further execution
+        }
+    };
     return (
         <div className="flex justify-center items-center h-screen bg-gray-100">
             <div className="bg-white p-8 rounded-lg shadow-lg w-full sm:w-96">

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authcontext } from '../Authprovider/Authprovider';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const Register = () => {
     const { user, setUser, registerUser, setLoading, updateuserprofile, signinwithGoogle } = useContext(authcontext)
@@ -39,6 +40,7 @@ const Register = () => {
             .then(result => {
                 console.log(result.user);
                 setUser(result.user)
+                setLoading(false)
                 updateuserprofile(info)
                     .then((result) => {
                         setUser((prevUser) => {
@@ -49,23 +51,42 @@ const Register = () => {
                     }
                     )
                 setLoading(false)
+                const role = 'participent';
+                const rdata = { name, email, role, photo }
+                axios.post('http://localhost:5000/sign', rdata)
+                    .then(data => {
+                        console.log(data.data);
+                    })
                 toast.success('register succefully')
                 navigate('/')
             })
 
     }
-    const handlegooglesingin = () => {
-        signinwithGoogle()
-            .then(result => {
+    const handlegooglesignin = async () => {
+        try {
+            const result = await signinwithGoogle();
+            const { displayName: name, email, photoURL: photo } = result.user;
+            const role = 'participant';
+            const rdata = { name, email, role, photo };
+
+            // Sending user data to the database
+            const response = await axios.post('http://localhost:5000/sign', rdata);
+
+            if (response.status === 200 || response.status === 201) {
                 setUser(result.user);
-                setLoading(false)
-                toast.success('Successfully Logged in BY google')
-                navigate('/')
-            })
-            .catch(error => {
-                console.log(error.message);
-            })
-    }
+                setLoading(false);
+                toast.success('Successfully logged in');
+                navigate('/');
+            } else {
+                toast.error('Failed to save user data. Please try again.');
+                return;
+            }
+        } catch (error) {
+            console.error('Error during Google Sign-in:', error);
+            toast.error('Google Sign-in failed. Please try again.');
+            return; // Prevent further execution
+        }
+    };
     return (
         <div className="flex justify-center items-center h-screen bg-gray-100">
             <div className="bg-white p-8 rounded-lg shadow-lg w-full sm:w-96">
@@ -109,7 +130,7 @@ const Register = () => {
                 </form>
 
                 <div>
-                    <button onClick={handlegooglesingin}>Sign in google</button>
+                    <button onClick={handlegooglesignin}>Sign in google</button>
                 </div>
 
                 <div className="flex justify-between items-center mt-4">

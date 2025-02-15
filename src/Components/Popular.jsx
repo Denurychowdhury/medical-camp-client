@@ -36,6 +36,9 @@ const Popular = () => {
                             <p className="text-sm font-bold text-blue-600">
                                 Participants: {camp.participantCount}
                             </p>
+                            <button className='p-3 rounded-b-md bg-blue-600'>
+                                <Link to={`/details/${camp._id}`}>Details</Link>
+                            </button>
                         </div>
                     </div>
                 ))}

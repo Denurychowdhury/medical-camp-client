@@ -44,6 +44,9 @@ const Campdetails = () => {
         e.preventDefault();
 
         const submissionData = {
+            role: 'participent',
+            status: 'pending',
+            paymentstatus: 'unpaid',
             campName: camp.campName,
             campFees: camp.campFees,
             location: camp.location,
@@ -66,6 +69,9 @@ const Campdetails = () => {
             });
     };
 
+    const handleincrease = (id) => {
+        axios.put(`http://localhost:5000/camps/part/${id}`)
+    }
     return (
         <div className="container mx-auto p-6 bg-gray-50 rounded-lg shadow-lg">
             <div className="mb-6 p-6 bg-gray-100 rounded-lg shadow-md">
@@ -96,8 +102,8 @@ const Campdetails = () => {
                             <input type="text" value={camp.campName} readOnly className="w-full p-2 border rounded bg-gray-100" />
                             <input type="text" value={camp.campFees} readOnly className="w-full p-2 border rounded bg-gray-100" />
                             <input type="text" value={camp.location} readOnly className="w-full p-2 border rounded bg-gray-100" />
-                            <input type="text" value={user.displayName || ""} readOnly className="w-full p-2 border rounded bg-gray-100" />
-                            <input type="email" value={user.email || ""} readOnly className="w-full p-2 border rounded bg-gray-100" />
+                            <input type="text" value={user?.displayName || ""} readOnly className="w-full p-2 border rounded bg-gray-100" />
+                            <input type="email" value={user?.email || ""} readOnly className="w-full p-2 border rounded bg-gray-100" />
 
                             {/* Editable fields */}
                             <input
@@ -139,7 +145,7 @@ const Campdetails = () => {
                                 placeholder="Emergency Contact"
                                 required
                             />
-                            <button type="submit" className="w-full p-2 bg-green-600 text-white rounded hover:bg-green-700">
+                            <button onClick={() => handleincrease(camp._id)} type="submit" className="w-full p-2 bg-green-600 text-white rounded hover:bg-green-700">
                                 Submit
                             </button>
                         </form>

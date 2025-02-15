@@ -8,6 +8,13 @@ import AddCamp from "../Components/Addcamp";
 import Profile from "../Pages/Profile";
 import Available from "../Pages/Available";
 import Campdetails from "../Pages/Campdetails";
+import Manage from "../Pages/Manage";
+import Update from "../Pages/Update";
+import Recharts from "../Pages/Recharts";
+import Registered from "../Pages/Registered";
+import Payment from "../Pages/payment/Payment";
+import Mregister from "../Pages/Manaereg/Mregister";
+import PaymentHistory from "../Pages/PaymentHistory";
 
 
 const Router = createBrowserRouter([
@@ -48,6 +55,34 @@ const Router = createBrowserRouter([
             {
                 path: 'profile',
                 element: <Profile></Profile>
+            },
+            {
+                path: 'manage',
+                element: <Manage></Manage>
+            },
+            {
+                path: 'recharts',
+                element: <Recharts></Recharts>
+            },
+            {
+                path: 'registered',
+                element: <Registered></Registered>
+            },
+            {
+                path: 'pay/:id',
+                element: <Payment></Payment>
+            },
+            {
+                path: 'update/:id',
+                element: <Update></Update>
+            },
+            {
+                path: 'mregister',
+                element: <Mregister></Mregister>
+            },
+            {
+                path: 'payhistory',
+                element: <PaymentHistory></PaymentHistory>
             }
         ]
     }
