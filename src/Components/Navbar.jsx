@@ -47,9 +47,9 @@ const Navbar = () => {
                             className="flex items-center space-x-2"
                         >
                             <img
-                                src={user.photo || "/default-profile.png"}
+                                src={user.photoURL || "/default-profile.png"}
                                 alt="Profile"
-                                className="h-8 w-8 rounded-full border border-white"
+                                className="h-12 w-12 rounded-full border border-white"
                             />
                         </button>
                         {isMenuOpen && (
@@ -58,7 +58,7 @@ const Navbar = () => {
                                     <span className="block font-medium">{user.displayName}</span>
                                 </div>
                                 <Link
-                                    to="/dashboard"
+                                    to="/dashboard/manage"
                                     className="block px-4 py-2 hover:bg-gray-100"
                                 >
                                     Dashboard

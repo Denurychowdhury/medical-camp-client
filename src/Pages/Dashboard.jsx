@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import { authcontext } from '../Authprovider/Authprovider';
-
+import { FaHome, FaUser, FaPlus, FaList, FaRegRegistered, FaChartLine, FaHistory } from 'react-icons/fa';
 
 const Dashboard = () => {
     const { user } = useContext(authcontext);
@@ -23,92 +23,150 @@ const Dashboard = () => {
     return (
         <div className="flex min-h-screen bg-gray-100">
             {/* Sidebar */}
+            <div className="w-64 bg-gradient-to-b from-blue-800 to-blue-900 text-white p-6 shadow-lg">
+                {/* Back to Home Button */}
+                <Link to="/" className="flex items-center space-x-2 mb-8 hover:text-blue-300 transition-colors">
+                    <FaHome className="w-5 h-5" />
+                    <span>Back to Home</span>
+                </Link>
 
-            {
-                userRole == 'admin' ? <div className="w-64 bg-blue-800 text-white p-4">
-                    <h1 className="text-2xl font-bold mb-6">Organizer Dashboard</h1>
-                    <nav>
-                        <ul>
-                            <li className="mb-4">
-                                <NavLink
-                                    to="/dashboard/profile"
-                                    className={({ isActive }) => isActive ? "text-blue-300 font-bold" : "hover:text-blue-300"}
-                                >
-                                    Organizer Profile
-                                </NavLink>
-                            </li>
-                            <li className="mb-4">
-                                <NavLink
-                                    to="/dashboard/addcamp"
-                                    className={({ isActive }) => isActive ? "text-blue-300 font-bold" : "hover:text-blue-300"}
-                                >
-                                    Add A Camp
-                                </NavLink>
-                            </li>
-                            <li className="mb-4">
-                                <NavLink
-                                    to="/dashboard/manage"
-                                    className={({ isActive }) => isActive ? "text-blue-300 font-bold" : "hover:text-blue-300"}
-                                >
-                                    Manage Camps
-                                </NavLink>
-                            </li>
-                            <li className="mb-4">
-                                <NavLink
-                                    to="/dashboard/mregister"
-                                    className={({ isActive }) => isActive ? "text-blue-300 font-bold" : "hover:text-blue-300"}
-                                >
-                                    Manage Registered Camps
-                                </NavLink>
-                            </li>
-                        </ul>
-                    </nav>
-                </div> :
-                    <div className="w-64 bg-blue-800 text-white p-4">
-                        <h1 className="text-2xl font-bold mb-6">Participant Dashboard</h1>
-                        <nav>
-                            <ul>
+                {/* Dashboard Title */}
+                <h1 className="text-2xl font-bold mb-8">
+                    {userRole === 'admin' ? 'Organizer Dashboard' : 'Participant Dashboard'}
+                </h1>
+
+                {/* Navigation Links */}
+                <nav>
+                    <ul>
+                        {userRole === 'admin' ? (
+                            <>
+                                <li className="mb-4">
+                                    <NavLink
+                                        to="/dashboard/profile"
+                                        className={({ isActive }) =>
+                                            `flex items-center space-x-2 p-2 rounded-lg transition-colors ${isActive
+                                                ? 'bg-blue-700 text-white font-bold'
+                                                : 'hover:bg-blue-700 hover:text-white'
+                                            }`
+                                        }
+                                    >
+                                        <FaUser className="w-5 h-5" />
+                                        <span>Organizer Profile</span>
+                                    </NavLink>
+                                </li>
+                                <li className="mb-4">
+                                    <NavLink
+                                        to="/dashboard/addcamp"
+                                        className={({ isActive }) =>
+                                            `flex items-center space-x-2 p-2 rounded-lg transition-colors ${isActive
+                                                ? 'bg-blue-700 text-white font-bold'
+                                                : 'hover:bg-blue-700 hover:text-white'
+                                            }`
+                                        }
+                                    >
+                                        <FaPlus className="w-5 h-5" />
+                                        <span>Add A Camp</span>
+                                    </NavLink>
+                                </li>
+                                <li className="mb-4">
+                                    <NavLink
+                                        to="/dashboard/manage"
+                                        className={({ isActive }) =>
+                                            `flex items-center space-x-2 p-2 rounded-lg transition-colors ${isActive
+                                                ? 'bg-blue-700 text-white font-bold'
+                                                : 'hover:bg-blue-700 hover:text-white'
+                                            }`
+                                        }
+                                    >
+                                        <FaList className="w-5 h-5" />
+                                        <span>Manage Camps</span>
+                                    </NavLink>
+                                </li>
+                                <li className="mb-4">
+                                    <NavLink
+                                        to="/dashboard/mregister"
+                                        className={({ isActive }) =>
+                                            `flex items-center space-x-2 p-2 rounded-lg transition-colors ${isActive
+                                                ? 'bg-blue-700 text-white font-bold'
+                                                : 'hover:bg-blue-700 hover:text-white'
+                                            }`
+                                        }
+                                    >
+                                        <FaRegRegistered className="w-5 h-5" />
+                                        <span>Manage Registered Camps</span>
+                                    </NavLink>
+                                </li>
+                            </>
+                        ) : (
+                            <>
                                 <li className="mb-4">
                                     <NavLink
                                         to="/dashboard/recharts"
-                                        className={({ isActive }) => isActive ? "text-blue-300 font-bold" : "hover:text-blue-300"}
+                                        className={({ isActive }) =>
+                                            `flex items-center space-x-2 p-2 rounded-lg transition-colors ${isActive
+                                                ? 'bg-blue-700 text-white font-bold'
+                                                : 'hover:bg-blue-700 hover:text-white'
+                                            }`
+                                        }
                                     >
-                                        Analytics
+                                        <FaChartLine className="w-5 h-5" />
+                                        <span>Analytics</span>
                                     </NavLink>
                                 </li>
                                 <li className="mb-4">
                                     <NavLink
                                         to="/dashboard/profile"
-                                        className={({ isActive }) => isActive ? "text-blue-300 font-bold" : "hover:text-blue-300"}
+                                        className={({ isActive }) =>
+                                            `flex items-center space-x-2 p-2 rounded-lg transition-colors ${isActive
+                                                ? 'bg-blue-700 text-white font-bold'
+                                                : 'hover:bg-blue-700 hover:text-white'
+                                            }`
+                                        }
                                     >
-                                        Participant Profile
+                                        <FaUser className="w-5 h-5" />
+                                        <span>Participant Profile</span>
                                     </NavLink>
                                 </li>
                                 <li className="mb-4">
                                     <NavLink
                                         to="/dashboard/registered"
-                                        className={({ isActive }) => isActive ? "text-blue-300 font-bold" : "hover:text-blue-300"}
+                                        className={({ isActive }) =>
+                                            `flex items-center space-x-2 p-2 rounded-lg transition-colors ${isActive
+                                                ? 'bg-blue-700 text-white font-bold'
+                                                : 'hover:bg-blue-700 hover:text-white'
+                                            }`
+                                        }
                                     >
-                                        Registered Camps
+                                        <FaRegRegistered className="w-5 h-5" />
+                                        <span>Registered Camps</span>
                                     </NavLink>
                                 </li>
                                 <li className="mb-4">
                                     <NavLink
                                         to="/dashboard/payhistory"
-                                        className={({ isActive }) => isActive ? "text-blue-300 font-bold" : "hover:text-blue-300"}
+                                        className={({ isActive }) =>
+                                            `flex items-center space-x-2 p-2 rounded-lg transition-colors ${isActive
+                                                ? 'bg-blue-700 text-white font-bold'
+                                                : 'hover:bg-blue-700 hover:text-white'
+                                            }`
+                                        }
                                     >
-                                        Payment History
+                                        <FaHistory className="w-5 h-5" />
+                                        <span>Payment History</span>
                                     </NavLink>
                                 </li>
-                            </ul>
-                        </nav>
-                    </div>
-            }
+                            </>
+                        )}
+                    </ul>
+                </nav>
+            </div>
 
             {/* Main Content */}
-            <div className="w-full p-8">
-                {/* Content will be rendered here based on the route */}
-                <Outlet></Outlet>
+            <div className="flex-1 p-8">
+                {/* Header */}
+                {/* Content Area */}
+                <Outlet />
+
             </div>
         </div>
     );
