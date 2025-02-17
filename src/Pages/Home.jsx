@@ -2,6 +2,7 @@
 import Banner from '../Components/Banner';
 import Feedback from '../Components/Feedback';
 import Popular from '../Components/Popular';
+import System from '../Components/System';
 
 const Home = () => {
     return (
@@ -9,6 +10,7 @@ const Home = () => {
             <Banner></Banner>
             <Popular></Popular>
             <Feedback></Feedback>
+            <System></System>
         </div>
     );
 };

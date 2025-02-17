@@ -15,6 +15,7 @@ import Registered from "../Pages/Registered";
 import Payment from "../Pages/payment/Payment";
 import Mregister from "../Pages/Manaereg/Mregister";
 import PaymentHistory from "../Pages/PaymentHistory";
+import Privateroute from "./Privateroute";
 
 
 const Router = createBrowserRouter([
@@ -46,7 +47,9 @@ const Router = createBrowserRouter([
     },
     {
         path: 'dashboard',
-        element: <Dashboard></Dashboard>,
+        element: <Privateroute>
+            <Dashboard></Dashboard>
+        </Privateroute>,
         children: [
             {
                 path: 'addcamp',
