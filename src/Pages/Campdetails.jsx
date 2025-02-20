@@ -25,7 +25,7 @@ const Campdetails = () => {
             const { data } = await axiosSecure.get(`/camps/camp/${id}`);
             return data;
         },
-        staleTime: 1000 * 60 * 5, // Cache for 5 minutes
+        staleTime: 1000 * 60 * 5,
     });
 
     if (isLoading) return <p className="text-center text-gray-600">Fetching camp details...</p>;
