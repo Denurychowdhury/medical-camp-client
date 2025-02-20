@@ -10,11 +10,7 @@ const Mregister = () => {
     const [participants, setParticipantes] = useState([])
     const [paid, setPaid] = useState(null)
     useEffect(() => {
-        axiospublic.get(`/participate`, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('accesstoken')}`
-            }
-        })
+        axiospublic.get(`/participate`)
             .then(res => {
                 console.log(res.data);
                 setParticipantes(res.data)

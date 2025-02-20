@@ -1,7 +1,7 @@
 const System = () => {
     return (
-        <section className="bg-blue-50 py-12">
-            <div className="container mx-auto px-6">
+        <section className="bg-blue-50 md:py-12 py-5">
+            <div className="container mx-auto md:px-6 px-3">
                 <h2 className="text-3xl font-bold text-blue-700 text-center mb-6">Medical Camp Management System</h2>
                 <p className="text-gray-600 text-center max-w-2xl mx-auto">
                     A streamlined solution for organizing and managing medical camps efficiently. From scheduling to participant tracking, we’ve got it all covered!

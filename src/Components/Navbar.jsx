@@ -114,7 +114,7 @@ const Navbar = () => {
                         Home
                     </Link>
                     <Link
-                        to="/available-camps"
+                        to="/available"
                         className="block px-4 py-2 hover:bg-blue-500"
                         onClick={() => setIsMenuOpen(false)}
                     >
@@ -122,7 +122,7 @@ const Navbar = () => {
                     </Link>
                     {!user && (
                         <Link
-                            to="/join-us"
+                            to="/login"
                             className="block px-4 py-2 hover:bg-blue-500"
                             onClick={() => setIsMenuOpen(false)}
                         >
