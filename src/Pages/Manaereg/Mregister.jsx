@@ -100,7 +100,7 @@ const Mregister = () => {
                                             ? "bg-green-400 text-white cursor-not-allowed"
                                             : "bg-yellow-400 text-white"
                                             }`}
-                                        disabled={participant.status === "confirmed"}
+                                        disabled={participant.paymentStatus === "unpaid"}
                                     >
                                         {participant.status}
                                     </button>
