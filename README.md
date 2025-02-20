@@ -6,7 +6,8 @@
 
 # Live site url: https://medical-camp-pro.web.app/
 
-## 10 bullet points featuring the website.
+## 10 bullet points featuring the website:
+
 * Login/logout implementation
 * A logged-in user can not register again with the same credentials.
 * Top-rated medical camp dynamic section.

@@ -16,12 +16,14 @@ import Payment from "../Pages/payment/Payment";
 import Mregister from "../Pages/Manaereg/Mregister";
 import PaymentHistory from "../Pages/PaymentHistory";
 import Privateroute from "./Privateroute";
+import Errorpage from "../Pages/Errorpage";
 
 
 const Router = createBrowserRouter([
     {
         path: '/',
         element: <Mainlayout></Mainlayout>,
+        Errorpage: <Errorpage></Errorpage>,
         children: [
             {
                 path: '/',
