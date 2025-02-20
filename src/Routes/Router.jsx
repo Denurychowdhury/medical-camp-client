@@ -23,7 +23,6 @@ const Router = createBrowserRouter([
     {
         path: '/',
         element: <Mainlayout></Mainlayout>,
-        Errorpage: <Errorpage></Errorpage>,
         children: [
             {
                 path: '/',
@@ -90,6 +89,10 @@ const Router = createBrowserRouter([
                 element: <PaymentHistory></PaymentHistory>
             }
         ]
+    },
+    {
+        path: '*',
+        element: <Errorpage />
     }
 ])
 
