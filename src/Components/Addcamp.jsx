@@ -100,7 +100,13 @@ const AddCamp = () => {
                         <InputField label="Date & Time" name="date" type="datetime-local" />
                         <InputField label="Location" name="location" type="text" />
                         <InputField label="Healthcare Professional Name" name="healthcareProfessionalName" type="text" />
-                        <InputField label="Participant Count" name="participantCount" type="number" readOnly />
+                        <InputField
+                            label="Participant Count"
+                            name="participantCount"
+                            type="number"
+                            value={0}
+                            disabled
+                        />
                         <TextAreaField label="Description" name="description" />
 
                         <button

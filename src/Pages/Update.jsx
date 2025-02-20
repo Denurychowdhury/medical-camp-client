@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { data, useNavigate, useParams } from 'react-router-dom';
+import Useaxiosecure from '../Hooks/Useaxiosecure';
 const imageHostingKey = import.meta.env.VITE_IMAGE_KEY;
 const imageHostingAPI = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 
@@ -8,8 +9,9 @@ const Update = () => {
     const [camp, setCamp] = useState({})
     const { id } = useParams()
     const navigate = useNavigate()
+    const axiosSecure = Useaxiosecure()
     useEffect(() => {
-        axios.get(`http://localhost:5000/camps/${id}`)
+        axiosSecure.get(`/camps/camp/${id}`)
             .then(data => {
                 console.log(data.data);
                 setCamp(data.data)
@@ -24,7 +26,7 @@ const Update = () => {
         const date = form.date.value;
         const location = form.location.name;
         const healthcareProfessionalName = form.professional.value;
-        const participantCount = form.count.value;
+        const participantCount = parseInt(form.count.value);
         const description = form.desc.value;
 
         const campinfo = { campName, image, campFees, date, location, healthcareProfessionalName, participantCount, description }
