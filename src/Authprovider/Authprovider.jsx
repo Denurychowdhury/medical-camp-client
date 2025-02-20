@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged,
 import React, { createContext, useEffect, useState } from 'react';
 import { auth } from '../Firebase/Firebase.config';
 import { useQuery } from '@tanstack/react-query';
+import useAxiosPublic from '../Hooks/useAxiospublic';
 
 
 export const authcontext = createContext()
@@ -12,6 +13,7 @@ const Authprovider = ({ children }) => {
     // const [home, setHome] = useState(null)
     const [theme, setTheme] = useState(false)
     const provider = new GoogleAuthProvider();
+    const axiospublic = useAxiosPublic()
     const registerUser = (email, password) => {
         setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
@@ -50,6 +52,19 @@ const Authprovider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentuser => {
             setUser(currentuser)
+            if (currentuser) {
+                // get token and store client
+                const userInfo = { email: currentuser.email }
+                axiospublic.post('/jwt', userInfo)
+                    .then(res => {
+                        if (res.data.token) {
+                            localStorage.setItem('access-token', res.data.token)
+                        }
+                    })
+            }
+            else {
+                localStorage.removeItem('access-token')
+            }
             setLoading(false)
         })
         return () => {

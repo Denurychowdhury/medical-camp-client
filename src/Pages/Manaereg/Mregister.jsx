@@ -9,7 +9,11 @@ const Mregister = () => {
     const [participants, setParticipantes] = useState([])
     const [paid, setPaid] = useState(null)
     useEffect(() => {
-        axiospublic.get(`/participate`)
+        axiospublic.get(`/participate`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('accesstoken')}`
+            }
+        })
             .then(res => {
                 console.log(res.data);
                 setParticipantes(res.data)
@@ -45,8 +49,6 @@ const Mregister = () => {
         try {
             const res = await axiospublic.delete(`/participate/delete/${id}`);
             console.log(res.data);
-
-            // Use `filter` to remove the deleted participant from the state
             const filteredParticipants = participants.filter(part => part._id !== id);
             setParticipantes(filteredParticipants);
 

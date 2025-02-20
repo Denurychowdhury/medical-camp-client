@@ -1,14 +1,16 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { authcontext } from "../Authprovider/Authprovider";
 import { toast } from "react-toastify";
+import { authcontext } from "../Authprovider/Authprovider";
+import Useaxiosecure, { axiosSecure } from "../Hooks/Useaxiosecure";
 
 const Campdetails = () => {
     const [camp, setCamp] = useState(null);
     const { user } = useContext(authcontext);
     const { id } = useParams();
     const [showModal, setShowModal] = useState(false);
+    const axiosSecure = Useaxiosecure()
     const [formData, setFormData] = useState({
         age: "",
         phoneNumber: "",
@@ -18,7 +20,7 @@ const Campdetails = () => {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/camps/${id}`)
+        axiosSecure.get(`/camps/camp/${id}`)
             .then(response => {
                 console.log("Camp Data:", response.data);
                 setCamp(response.data);

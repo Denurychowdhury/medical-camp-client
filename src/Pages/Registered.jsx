@@ -7,25 +7,27 @@ import { authcontext } from '../Authprovider/Authprovider';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import FeedbackModal from '../Components/FeedbackModal';
+import { axiosSecure } from '../Hooks/Useaxiosecure';
 
 const Registered = () => {
     const { user } = useContext(authcontext);
     const axiospublic = useAxiosPublic()
+
     const [part, setPart] = useState([])
     const [isModalOpen, setModalOpen] = useState(false);
     useEffect(() => {
-        if (user?.email) { // Check if user and user.email exist
-            axiospublic.get(`/participate/${user.email}`)
+        if (user?.email) {
+            axiosSecure.get(`/participate/${user.email}`)
                 .then(response => {
                     console.log('Fetched Participation Data:', response.data);
-                    setPart(response.data); // Set the participation data
+                    setPart(response.data);
                 })
                 .catch(error => {
                     console.error('Error fetching participation data:', error);
-                    // Optionally, handle the error (e.g., set an error state)
+
                 });
         }
-    }, [user, axiospublic]); // Add user and axiospublic to the dependency array
+    }, [user]);
 
     const participate = () => {
         const { refetch, data: participates = {} } = useQuery({
@@ -50,7 +52,6 @@ const Registered = () => {
             const res = await axiospublic.delete(`/participate/delete/${id}`);
             console.log(res.data);
 
-            // Use `filter` to remove the deleted participant from the state
             const filteredParticipants = part.filter(part => part._id !== id);
             setPart(filteredParticipants);
 

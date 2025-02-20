@@ -3,12 +3,12 @@ import { authcontext } from '../Authprovider/Authprovider';
 
 const Profile = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const { user, updateuserprofile } = useContext(authcontext); // Assuming updateUserProfile is available in authcontext
+    const { user, updateuserprofile } = useContext(authcontext);
 
     const [profileData, setProfileData] = useState({
         name: user?.displayName || "",
         photo: user?.photoURL || "",
-        contact: "", // Fetch and prefill from Firestore if available
+        contact: "",
     });
 
     const handleInputChange = (e) => {
@@ -25,7 +25,6 @@ const Profile = () => {
             await updateuserprofile({
                 displayName: profileData.name,
                 photoURL: profileData.photo,
-                // Add contact info update if needed (store in Firestore if it's not part of auth)
             });
             console.log("Profile updated successfully");
             setIsModalOpen(false);

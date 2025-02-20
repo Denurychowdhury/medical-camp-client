@@ -12,7 +12,6 @@ const FeedbackModal = ({ isOpen, onClose }) => {
         // Handle form submission
         console.log("Rating:", rating);
         console.log("Comment:", comment);
-        // You can add your logic to send this data to a server or handle it in some other way.
         const feedback = { rating, comment }
         axiospublic.post('/feedbacks', feedback)
             .then(res => {

@@ -39,9 +39,9 @@ const Manage = () => {
     };
 
     // Pagination logic
-    const indexOfLastItem = currentPage * itemsPerPage; // Index of the last item on the current page
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage; // Index of the first item on the current page
-    const currentCamps = camps.slice(indexOfFirstItem, indexOfLastItem); // Items to display on the current page
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentCamps = camps.slice(indexOfFirstItem, indexOfLastItem);
 
     // Change page
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -104,7 +104,7 @@ const Manage = () => {
                         value={itemsPerPage}
                         onChange={(e) => {
                             setItemsPerPage(Number(e.target.value));
-                            setCurrentPage(1); // Reset to the first page when changing items per page
+                            setCurrentPage(1);
                         }}
                         className="p-2 border rounded"
                     >

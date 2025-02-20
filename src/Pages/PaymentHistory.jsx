@@ -7,15 +7,14 @@ const PaymentHistory = () => {
     const axiospublic = useAxiosPublic()
     const [paymentHistory, setPayhistory] = useState([])
     useEffect(() => {
-        if (user?.email) { // Check if user and user.email exist
+        if (user?.email) {
             axiospublic.get(`/payment/history/${user.email}`)
                 .then(response => {
                     console.log('Fetched Participation Data:', response.data);
-                    setPayhistory(response.data); // Set the participation data
+                    setPayhistory(response.data);
                 })
                 .catch(error => {
                     console.error('Error fetching participation data:', error);
-                    // Optionally, handle the error (e.g., set an error state)
                 });
         }
     }, [user, axiospublic]);

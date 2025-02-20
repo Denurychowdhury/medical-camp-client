@@ -117,7 +117,7 @@ const AddCamp = () => {
     );
 };
 
-// Reusable Input Field Component
+
 const InputField = ({ label, name, type }) => (
     <div className="mb-6">
         <label className="block text-gray-700 font-medium mb-2" htmlFor={name}>
@@ -128,7 +128,7 @@ const InputField = ({ label, name, type }) => (
     </div>
 );
 
-// Reusable File Upload Field Component
+
 const FileField = ({ label, name, setFieldValue }) => (
     <div className="mb-6">
         <label className="block text-gray-700 font-medium mb-2" htmlFor={name}>
@@ -144,7 +144,7 @@ const FileField = ({ label, name, setFieldValue }) => (
     </div>
 );
 
-// Reusable Text Area Component
+
 const TextAreaField = ({ label, name }) => (
     <div className="mb-6">
         <label className="block text-gray-700 font-medium mb-2" htmlFor={name}>

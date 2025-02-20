@@ -84,7 +84,7 @@ const Register = () => {
         } catch (error) {
             console.error('Error during Google Sign-in:', error);
             toast.error('Google Sign-in failed. Please try again.');
-            return; // Prevent further execution
+            return;
         }
     };
     return (

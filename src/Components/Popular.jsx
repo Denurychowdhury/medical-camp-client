@@ -6,7 +6,6 @@ const Popular = () => {
     const [popularCamps, setPopularCamps] = useState([]);
 
     useEffect(() => {
-        // Sort camps by participant count in descending order and take the top 6
         axios.get('http://localhost:5000/homecamps')
             .then(data => {
                 setPopularCamps(data.data)

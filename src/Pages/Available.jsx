@@ -8,7 +8,7 @@ const Available = () => {
     const [camps, setCamps] = useState([])
 
     const [search, setSearch] = useState('');
-    const [layout, setLayout] = useState('lg:grid-cols-3'); // Default layout to 3 columns
+    const [layout, setLayout] = useState('lg:grid-cols-3');
     const [sortOption, setSortOption] = useState('alphabetical');
 
     useEffect(() => {
@@ -18,7 +18,7 @@ const Available = () => {
                 setCamps(data.data)
             })
     }, [search])
-    // Filter camps based on search term
+    // Filter camps based on search termhe
     const filteredCamps = camps.filter((camp) =>
         camp.campName.toLowerCase().includes(search.toLowerCase())
     );
@@ -29,7 +29,7 @@ const Available = () => {
             return b.participantCount - a.participantCount;
         } else if (sortOption === 'camp-fees') {
             return a.campFees - b.campFees;
-        } else {  // Default case for alphabetical sorting
+        } else {
             return a.campName.localeCompare(b.campName);
         }
     });
