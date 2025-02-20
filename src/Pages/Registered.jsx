@@ -11,6 +11,7 @@ import Useaxiosecure, { axiosSecure } from '../Hooks/Useaxiosecure';
 
 const Registered = () => {
     const { user } = useContext(authcontext);
+    const axiosPublic = useAxiosPublic()
     const axiosSecure = Useaxiosecure()
     console.log(user);
     const [part, setPart] = useState([])
@@ -49,7 +50,7 @@ const Registered = () => {
 
     const handleCancel = async (id) => {
         try {
-            const res = await axiospublic.delete(`/participate/delete/${id}`);
+            const res = await axiosPublic.delete(`/participate/delete/${id}`);
             console.log(res.data);
 
             const filteredParticipants = part.filter(part => part._id !== id);
@@ -67,21 +68,21 @@ const Registered = () => {
             <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-sm">
                 <thead className="bg-gray-100">
                     <tr>
-                        <th className="p-4 text-left">Camp Name</th>
-                        <th className="p-4 text-left">Camp Fees</th>
-                        <th className="p-4 text-left">Participant Name</th>
-                        <th className="p-4 text-left">Payment Status</th>
-                        <th className="p-4 text-left">Confirmation Status</th>
-                        <th className="p-4 text-left">Action</th>
+                        <th className="md:p-4 p-2 text-left">Camp Name</th>
+                        <th className="md:p-4 p-2 text-left">Camp Fees</th>
+                        <th className="md:p-4 p-2 text-left">Participant Name</th>
+                        <th className="md:p-4 p-2 text-left">Payment Status</th>
+                        <th className="md:p-4 p-2 text-left">Confirmation Status</th>
+                        <th className="md:p-4 p-2 text-left">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     {part.map((camp) => (
                         <tr key={camp._id} className="border-b hover:bg-gray-50">
-                            <td className="p-4">{camp.campName}</td>
-                            <td className="p-4">{`${camp.campFees}`}</td>
-                            <td className="p-4">{camp.participantName}</td>
-                            <td className="p-4">
+                            <td className="md:p-4 p-2">{camp.campName}</td>
+                            <td className="md:p-4 p-2">{`${camp.campFees}`}</td>
+                            <td className="md:p-4 p-2">{camp.participantName}</td>
+                            <td className="md:p-4 p-2">
                                 <Link to={`/dashboard/pay/${camp._id}`}>
                                     <button disabled={camp.paymentstatus == 'paid'} className='bg-amber-300 text-blue-400 p-2 text-xl'>
                                         {camp.paymentstatus == 'paid' ? 'paid' : 'Pay'}

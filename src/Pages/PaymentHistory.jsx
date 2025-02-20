@@ -19,7 +19,7 @@ const PaymentHistory = () => {
         }
     }, [user, axiospublic]);
     return (
-        <div className="container mx-auto mt-8">
+        <div className="container mx-auto md:mt-8 mt-3">
             <h2 className="text-2xl font-bold mb-4">Payment History</h2>
             <div className="overflow-x-auto">
                 <table className="table-auto w-full border-collapse border border-gray-300">

@@ -72,7 +72,7 @@ const Campdetails = () => {
     };
 
     return (
-        <div className="container mx-auto p-6 bg-gray-50 rounded-lg shadow-lg">
+        <div className="md:container mx-auto md:p-6 p-2 bg-gray-50 rounded-lg shadow-lg">
             <div>
                 <Helmet>
                     <title>{`Medical camp pro/${camp.campName}/details`}</title>
@@ -100,7 +100,7 @@ const Campdetails = () => {
             {/* Registration Modal */}
             {showModal && (
                 <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
-                    <div className="bg-white p-6 rounded-lg shadow-lg w-1/2 mx-auto relative max-h-[80vh] overflow-y-auto">
+                    <div className="bg-white p-6 rounded-lg shadow-lg md:w-1/2 mx-auto relative max-h-[80vh] overflow-y-auto">
                         <h2 className="text-xl font-semibold text-blue-700 text-center mb-4">Register for {camp.campName}</h2>
                         <form onSubmit={registerForCamp} className="space-y-3">
                             {/* Read-only fields */}

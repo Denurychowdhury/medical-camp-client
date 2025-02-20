@@ -48,7 +48,7 @@ const Manage = () => {
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
-        <div className="p-6">
+        <div className="md:p-6 p-2">
             <div>
                 <Helmet>
                     <title>Medical camp pro/Manage</title>

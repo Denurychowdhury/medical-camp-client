@@ -40,12 +40,12 @@ const Update = () => {
     }
     console.log(camp);
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-2/3 mx-auto relative overflow-y-auto">
+        <div className="inset-0 flex items-center justify-center bg-opacity-50 z-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg md:w-2/3 mx-auto relative overflow-y-auto">
                 <h2 className="text-xl font-semibold text-blue-700 text-center mb-4">Update a Camp</h2>
-                <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+                <form onSubmit={handleSubmit} className="grid md:grid-cols-2 grid-cols-1 gap-2">
                     {/* Left Column */}
-                    <div>
+                    <div className=''>
                         <label className="block text-gray-700 font-semibold">Camp Name</label>
                         <input type="text" name="campname" defaultValue={camp.campName} className="w-full p-2 border rounded bg-gray-100" />
                     </div>

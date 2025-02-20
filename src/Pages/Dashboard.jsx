@@ -22,10 +22,10 @@ const Dashboard = () => {
     }, [user]);
 
     return (
-        <div className="flex min-h-screen bg-gray-100">
+        <div className="flex md:flex-row flex-col md:min-h-screen lg:bg-gray-100">
 
             {/* Sidebar */}
-            <div className="w-64 bg-gradient-to-b from-blue-800 to-blue-900 text-white p-6 shadow-lg">
+            <div className="md:w-64 bg-gradient-to-b from-blue-800 to-blue-900 text-white md:p-6 shadow-lg">
                 {/* Back to Home Button */}
                 <Link to="/" className="flex items-center space-x-2 mb-8 hover:text-blue-300 transition-colors">
                     <FaHome className="w-5 h-5" />
@@ -164,7 +164,7 @@ const Dashboard = () => {
             </div>
 
             {/* Main Content */}
-            <div className="flex-1 p-8">
+            <div className="flex-1 lg:p-8">
                 {/* Header */}
                 {/* Content Area */}
 

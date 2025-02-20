@@ -85,7 +85,7 @@ const AddCamp = () => {
     };
 
     return (
-        <div className="flex-1 p-8">
+        <div className="flex-1 md:p-8 p-2">
             <div>
                 <Helmet>
                     <title>Medical camp pro/Add camp</title>
