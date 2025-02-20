@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { authcontext } from "../Authprovider/Authprovider";
 import Useaxiosecure from "../Hooks/Useaxiosecure";
+import { Helmet } from "react-helmet";
 
 const Campdetails = () => {
     const { user } = useContext(authcontext);
@@ -72,6 +73,12 @@ const Campdetails = () => {
 
     return (
         <div className="container mx-auto p-6 bg-gray-50 rounded-lg shadow-lg">
+            <div>
+                <Helmet>
+                    <title>{`Medical camp pro/${camp.campName}/details`}</title>
+                    <meta name="description" content="Nested component" />
+                </Helmet>
+            </div>
             <div className="mb-6 p-6 bg-gray-100 rounded-lg shadow-md">
                 <h4 className="text-xl font-semibold text-blue-600">{camp.campName}</h4>
                 <img src={camp.image} alt="Camp" className="w-full h-64 object-cover rounded-md mt-4" />

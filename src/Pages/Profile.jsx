@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { authcontext } from '../Authprovider/Authprovider';
+import { Helmet } from 'react-helmet';
 
 const Profile = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,6 +37,12 @@ const Profile = () => {
     return (
         <div>
             <div className="flex-1 p-8">
+                <div>
+                    <Helmet>
+                        <title>{`Medical camp pro/${profileData.name}`}</title>
+                        <meta name="description" content="Nested component" />
+                    </Helmet>
+                </div>
                 <h2 className="text-xl font-bold mb-4">Organizer Profile</h2>
                 <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
                     <img

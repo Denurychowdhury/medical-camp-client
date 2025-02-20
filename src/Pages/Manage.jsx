@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 
 const Manage = () => {
@@ -48,6 +49,12 @@ const Manage = () => {
 
     return (
         <div className="p-6">
+            <div>
+                <Helmet>
+                    <title>Medical camp pro/Manage</title>
+                    <meta name="description" content="Nested component" />
+                </Helmet>
+            </div>
             {/* Search Input */}
             <div className="mb-6">
                 <input

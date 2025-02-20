@@ -7,12 +7,12 @@ import { authcontext } from '../Authprovider/Authprovider';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import FeedbackModal from '../Components/FeedbackModal';
-import { axiosSecure } from '../Hooks/Useaxiosecure';
+import Useaxiosecure, { axiosSecure } from '../Hooks/Useaxiosecure';
 
 const Registered = () => {
     const { user } = useContext(authcontext);
-    const axiospublic = useAxiosPublic()
-
+    const axiosSecure = Useaxiosecure()
+    console.log(user);
     const [part, setPart] = useState([])
     const [isModalOpen, setModalOpen] = useState(false);
     useEffect(() => {

@@ -2,14 +2,15 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { authcontext } from '../Authprovider/Authprovider';
+import Useaxiosecure from '../Hooks/Useaxiosecure';
 
 const Recharts = () => {
     const { user } = useContext(authcontext);
     const [reg, setReg] = useState([]);
-
+    const axiosSecure = Useaxiosecure()
     useEffect(() => {
         if (user?.email) {
-            axios.get(`https://medical-camp-server-nine.vercel.app/participate/${user.email}`)
+            axiosSecure.get(`/participate/${user.email}`)
                 .then(response => {
                     setReg(response.data);
                 })

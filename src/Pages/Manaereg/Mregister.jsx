@@ -3,6 +3,7 @@ import useAxiosPublic from '../../Hooks/useAxiospublic';
 import { setPersistence } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import { useTheme } from '@emotion/react';
+import { Helmet } from 'react-helmet';
 
 const Mregister = () => {
     const axiospublic = useAxiosPublic()
@@ -61,6 +62,12 @@ const Mregister = () => {
 
     return (
         <div className="container mx-auto mt-8">
+            <div>
+                <Helmet>
+                    <title>Medical camp pro/Manage register</title>
+                    <meta name="description" content="Nested component" />
+                </Helmet>
+            </div>
             <h2 className="text-2xl font-bold mb-4">Registered Camps</h2>
             <div className="overflow-x-auto">
                 <table className="table-auto w-full border-collapse border border-gray-300">

@@ -3,6 +3,7 @@ import React from "react";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import useAxiosPublic from "../Hooks/useAxiospublic";
+import { Helmet } from "react-helmet";
 
 const imageHostingKey = import.meta.env.VITE_IMAGE_KEY;
 const imageHostingAPI = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
@@ -85,6 +86,12 @@ const AddCamp = () => {
 
     return (
         <div className="flex-1 p-8">
+            <div>
+                <Helmet>
+                    <title>Medical camp pro/Add camp</title>
+                    <meta name="description" content="Nested component" />
+                </Helmet>
+            </div>
             <h2 className="text-xl font-bold mb-4">Add a New Health Camp</h2>
 
             <Formik

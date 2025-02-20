@@ -23,6 +23,7 @@ const Dashboard = () => {
 
     return (
         <div className="flex min-h-screen bg-gray-100">
+
             {/* Sidebar */}
             <div className="w-64 bg-gradient-to-b from-blue-800 to-blue-900 text-white p-6 shadow-lg">
                 {/* Back to Home Button */}

@@ -21,17 +21,17 @@ const Footer = () => {
                                 </a>
                             </li>
                             <li>
-                                <a href="/available-camps" className="text-gray-300 hover:text-white">
+                                <a href="/available" className="text-gray-300 hover:text-white">
                                     Available Camps
                                 </a>
                             </li>
                             <li>
-                                <a href="/about" className="text-gray-300 hover:text-white">
+                                <a href="/" className="text-gray-300 hover:text-white">
                                     About Us
                                 </a>
                             </li>
                             <li>
-                                <a href="/contact" className="text-gray-300 hover:text-white">
+                                <a href="/" className="text-gray-300 hover:text-white">
                                     Contact
                                 </a>
                             </li>
@@ -48,7 +48,7 @@ const Footer = () => {
                                 <p className="text-gray-300">Phone: +1 800-123-4567</p>
                             </li>
                             <li>
-                                <p className="text-gray-300">Address: 123 Health St., City, Country</p>
+                                <p className="text-gray-300">Address: 123 Banasree, dhaka, Bangladesh</p>
                             </li>
                         </ul>
                     </div>
