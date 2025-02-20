@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { authcontext } from '../Authprovider/Authprovider';
 import { FaHome, FaUser, FaPlus, FaList, FaRegRegistered, FaChartLine, FaHistory } from 'react-icons/fa';
+import { ToastContainer } from 'react-toastify';
 
 const Dashboard = () => {
     const { user } = useContext(authcontext);
@@ -165,8 +166,9 @@ const Dashboard = () => {
             <div className="flex-1 p-8">
                 {/* Header */}
                 {/* Content Area */}
-                <Outlet />
 
+                <Outlet />
+                <ToastContainer></ToastContainer>
             </div>
         </div>
     );

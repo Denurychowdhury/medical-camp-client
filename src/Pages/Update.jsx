@@ -24,7 +24,7 @@ const Update = () => {
         const image = form.photo.value;
         const campFees = form.fees.value;
         const date = form.date.value;
-        const location = form.location.name;
+        const location = form.location.value;
         const healthcareProfessionalName = form.professional.value;
         const participantCount = parseInt(form.count.value);
         const description = form.desc.value;
