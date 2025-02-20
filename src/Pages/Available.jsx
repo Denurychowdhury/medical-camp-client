@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import Camp from '../Components/Camp';
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
 import { PiTextColumnsBold } from "react-icons/pi";
+import Camp from '../Components/Camp';
 const Available = () => {
 
     const [camps, setCamps] = useState([])
@@ -12,7 +12,7 @@ const Available = () => {
     const [sortOption, setSortOption] = useState('alphabetical');
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/camps/?search=${search}`)
+        axios.get(`https://medical-camp-server-nine.vercel.app/camps/?search=${search}`)
             .then(data => {
                 console.log(data);
                 setCamps(data.data)

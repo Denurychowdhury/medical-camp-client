@@ -1,8 +1,8 @@
-import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { authcontext } from '../Authprovider/Authprovider';
 import axios from 'axios';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { authcontext } from '../Authprovider/Authprovider';
 
 const JoinUs = () => {
     const { user, setUser, signinuser, signinwithGoogle, setLoading } = useContext(authcontext);
@@ -34,7 +34,7 @@ const JoinUs = () => {
             const rdata = { name, email, role, photo };
 
             // Sending user data to the database
-            const response = await axios.post('http://localhost:5000/sign', rdata);
+            const response = await axios.post('https://medical-camp-server-nine.vercel.app/sign', rdata);
 
             if (response.status === 200 || response.status === 201) {
                 setUser(result.user);

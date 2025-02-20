@@ -1,7 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { authcontext } from "../Authprovider/Authprovider";
 import Useaxiosecure from "../Hooks/Useaxiosecure";
@@ -57,7 +57,7 @@ const Campdetails = () => {
         };
 
         try {
-            await axios.post("http://localhost:5000/participate", participantInfo);
+            await axios.post("https://medical-camp-server-nine.vercel.app/participate", participantInfo);
             toast.success("You're successfully registered!");
             setShowModal(false);
         } catch {
@@ -67,7 +67,7 @@ const Campdetails = () => {
 
     // Increase participant count
     const increaseParticipantCount = async () => {
-        await axios.put(`http://localhost:5000/camps/part/${camp._id}`);
+        await axios.put(`https://medical-camp-server-nine.vercel.app/camps/part/${camp._id}`);
     };
 
     return (

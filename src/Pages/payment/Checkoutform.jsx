@@ -1,11 +1,9 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { authcontext } from '../../Authprovider/Authprovider';
 import useAxiosPublic from '../../Hooks/useAxiospublic';
-import { useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { dark } from '@mui/material/styles/createPalette';
 
 const Checkoutform = () => {
     const [error, setError] = useState('');
@@ -31,7 +29,7 @@ const Checkoutform = () => {
 
                     // Create payment intent using camp fees
                     const itemPrice = participationData.campFees;
-                    axios.post('http://localhost:5000/create-payment-intent', { price: itemPrice })
+                    axios.post('https://medical-camp-server-nine.vercel.app/create-payment-intent', { price: itemPrice })
                         .then(paymentResponse => {
                             setClientSecret(paymentResponse.data.clientSecret);
                         })

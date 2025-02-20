@@ -15,7 +15,7 @@ const Manage = () => {
 
     // Fetch camps data from the server
     useEffect(() => {
-        axios.get(`http://localhost:5000/camps/?search=${search}`)
+        axios.get(`https://medical-camp-server-nine.vercel.app/camps/?search=${search}`)
             .then((response) => {
                 console.log(response.data);
                 setCamps(response.data);
@@ -27,7 +27,7 @@ const Manage = () => {
 
     // Handle camp deletion
     const handleDelete = (id) => {
-        axios.delete(`http://localhost:5000/camp/delete/${id}`)
+        axios.delete(`https://medical-camp-server-nine.vercel.app/camp/delete/${id}`)
             .then(() => {
                 // Remove the deleted camp from the state
                 const remainingCamps = camps.filter((camp) => camp._id !== id);

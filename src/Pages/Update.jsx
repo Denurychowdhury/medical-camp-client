@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { data, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Useaxiosecure from '../Hooks/Useaxiosecure';
 const imageHostingKey = import.meta.env.VITE_IMAGE_KEY;
 const imageHostingAPI = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
@@ -32,7 +32,7 @@ const Update = () => {
         const campinfo = { campName, image, campFees, date, location, healthcareProfessionalName, participantCount, description }
         console.log(campinfo);
 
-        axios.patch(`http://localhost:5000/update-camp/${id}`, campinfo)
+        axios.patch(`https://medical-camp-server-nine.vercel.app/update-camp/${id}`, campinfo)
             .then(data => {
                 console.log(data.data);
                 navigate('/dashboard/manage')

@@ -1,9 +1,9 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
+import { FaChartLine, FaHistory, FaHome, FaList, FaPlus, FaRegRegistered, FaUser } from 'react-icons/fa';
 import { Link, NavLink, Outlet } from 'react-router-dom';
-import { authcontext } from '../Authprovider/Authprovider';
-import { FaHome, FaUser, FaPlus, FaList, FaRegRegistered, FaChartLine, FaHistory } from 'react-icons/fa';
 import { ToastContainer } from 'react-toastify';
+import { authcontext } from '../Authprovider/Authprovider';
 
 const Dashboard = () => {
     const { user } = useContext(authcontext);
@@ -11,7 +11,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         if (user?.email) {
-            axios.get(`http://localhost:5000/users/${user.email}`)
+            axios.get(`https://medical-camp-server-nine.vercel.app/users/${user.email}`)
                 .then(response => {
                     setUserRole(response.data.role);
                 })

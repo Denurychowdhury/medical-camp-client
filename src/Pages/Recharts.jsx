@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
+import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { authcontext } from '../Authprovider/Authprovider';
-import { BarChart, Bar, CartesianGrid, Legend, ResponsiveContainer, XAxis, YAxis, Tooltip } from 'recharts';
 
 const Recharts = () => {
     const { user } = useContext(authcontext);
@@ -9,7 +9,7 @@ const Recharts = () => {
 
     useEffect(() => {
         if (user?.email) {
-            axios.get(`http://localhost:5000/participate/${user.email}`)
+            axios.get(`https://medical-camp-server-nine.vercel.app/participate/${user.email}`)
                 .then(response => {
                     setReg(response.data);
                 })

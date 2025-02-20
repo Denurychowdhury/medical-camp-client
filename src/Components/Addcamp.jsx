@@ -1,8 +1,8 @@
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 import useAxiosPublic from "../Hooks/useAxiospublic";
-import { toast } from "react-toastify";
 
 const imageHostingKey = import.meta.env.VITE_IMAGE_KEY;
 const imageHostingAPI = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
@@ -63,7 +63,7 @@ const AddCamp = () => {
             console.log("Final Camp Data:", campData);
             // TODO: Send `campData` to your backend
 
-            fetch('http://localhost:5000/camps', {
+            fetch('https://medical-camp-server-nine.vercel.app/camps', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

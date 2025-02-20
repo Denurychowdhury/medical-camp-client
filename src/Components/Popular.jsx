@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Popular = () => {
     const [popularCamps, setPopularCamps] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/homecamps')
+        axios.get('https://medical-camp-server-nine.vercel.app/homecamps')
             .then(data => {
                 setPopularCamps(data.data)
             })
