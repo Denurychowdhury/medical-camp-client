@@ -104,13 +104,23 @@ const Campdetails = () => {
                         <h2 className="text-xl font-semibold text-blue-700 text-center mb-4">Register for {camp.campName}</h2>
                         <form onSubmit={registerForCamp} className="space-y-3">
                             {/* Read-only fields */}
+                            <label>Camp Name</label>
                             <input type="text" value={camp.campName} readOnly className="w-full p-2 border rounded bg-gray-100" />
+
+                            <label>Camp Fees</label>
                             <input type="text" value={camp.campFees} readOnly className="w-full p-2 border rounded bg-gray-100" />
+
+                            <label>Camp Location</label>
                             <input type="text" value={camp.location} readOnly className="w-full p-2 border rounded bg-gray-100" />
+
+                            <label>Participant Name</label>
                             <input type="text" value={user?.displayName || ""} readOnly className="w-full p-2 border rounded bg-gray-100" />
+
+                            <label>Participant Email</label>
                             <input type="email" value={user?.email || ""} readOnly className="w-full p-2 border rounded bg-gray-100" />
 
                             {/* Editable fields */}
+                            <label>Age</label>
                             <input
                                 type="number"
                                 name="age"
@@ -120,6 +130,8 @@ const Campdetails = () => {
                                 placeholder="Your Age"
                                 required
                             />
+
+                            <label>Phone Number</label>
                             <input
                                 type="text"
                                 name="phoneNumber"
@@ -129,6 +141,8 @@ const Campdetails = () => {
                                 placeholder="Phone Number"
                                 required
                             />
+
+                            <label>Gender</label>
                             <select
                                 name="gender"
                                 value={formData.gender}
@@ -141,6 +155,8 @@ const Campdetails = () => {
                                 <option value="Female">Female</option>
                                 <option value="Other">Other</option>
                             </select>
+
+                            <label>Emergency Contact</label>
                             <input
                                 type="text"
                                 name="emergencyContact"
@@ -150,6 +166,7 @@ const Campdetails = () => {
                                 placeholder="Emergency Contact"
                                 required
                             />
+
                             <button
                                 onClick={increaseParticipantCount}
                                 type="submit"
@@ -158,6 +175,7 @@ const Campdetails = () => {
                                 Register Now
                             </button>
                         </form>
+
                         <button onClick={toggleModal} className="absolute top-2 right-3 text-gray-500 text-xl">&times;</button>
                     </div>
                 </div>
