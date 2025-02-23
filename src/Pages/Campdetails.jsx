@@ -91,7 +91,7 @@ const Campdetails = () => {
 
                 <button
                     onClick={toggleModal}
-                    className="mt-6 py-2 px-6 bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-300"
+                    className="mt-6 py-2 px-6 bg-blue-600 cursor-pointer text-white rounded hover:bg-blue-700 transition duration-300"
                 >
                     Join Camp
                 </button>
@@ -170,7 +170,7 @@ const Campdetails = () => {
                             <button
                                 onClick={increaseParticipantCount}
                                 type="submit"
-                                className="w-full p-2 bg-green-600 text-white rounded hover:bg-green-700"
+                                className="w-full p-2 bg-green-600 cursor-pointer text-white rounded hover:bg-green-700"
                             >
                                 Register Now
                             </button>

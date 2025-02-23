@@ -136,7 +136,7 @@ const Register = () => {
                 <div className="flex justify-between items-center mt-4">
                     <p className="text-sm text-gray-600">
                         Already have an account?{' '}
-                        <a href="/login" className="text-blue-600 hover:underline">
+                        <a href="/login" className="text-blue-600 hover:underline cursor-pointer">
                             Login
                         </a>
                     </p>

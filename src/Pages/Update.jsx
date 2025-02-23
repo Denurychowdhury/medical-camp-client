@@ -88,7 +88,7 @@ const Update = () => {
 
                     {/* Submit Button */}
                     <div className="col-span-2">
-                        <button type="submit" className="w-full p-2 bg-green-600 text-white rounded hover:bg-green-700">
+                        <button type="submit" className="w-full cursor-pointer p-2 bg-green-600 text-white rounded hover:bg-green-700">
                             Submit
                         </button>
                     </div>

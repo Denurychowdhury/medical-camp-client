@@ -96,7 +96,7 @@ const Mregister = () => {
                                 <td className="p-3 border border-gray-300">
                                     <button
                                         onClick={() => hanldeStatus(participant._id)}
-                                        className={`px-3 py-1 rounded-lg ${participant.status === "confirmed"
+                                        className={`px-3 py-1 cursor-pointer rounded-lg ${participant.status === "confirmed"
                                             ? "bg-green-400 text-white cursor-not-allowed"
                                             : "bg-yellow-400 text-white"
                                             }`}
@@ -108,7 +108,7 @@ const Mregister = () => {
                                 <td className="p-3 border border-gray-300">
                                     <button
                                         onClick={() => handleCancel(participant._id)}
-                                        className={`px-3 py-1 rounded-lg ${participant.paymentStatus === "paid" &&
+                                        className={`px-3 py-1 cursor-pointer rounded-lg ${participant.paymentStatus === "paid" &&
                                             participant.confirmationStatus === "Confirmed"
                                             ? "bg-gray-400 text-white cursor-not-allowed"
                                             : "bg-red-500 text-white"

@@ -96,13 +96,13 @@ const Registered = () => {
                             </td>
                             <td>
                                 <div class="flex space-x-4">
-                                    <button onClick={() => handleCancel(camp._id)} disabled={camp.paymentstatus == 'paid'} class="px-4 py-2 bg-gray-300 text-gray-800 font-semibold rounded-lg hover:bg-gray-400 transition duration-300">
+                                    <button onClick={() => handleCancel(camp._id)} disabled={camp.paymentstatus == 'paid'} class="px-4 py-2 bg-gray-300 text-gray-800 cursor-pointer font-semibold rounded-lg hover:bg-gray-400 transition duration-300">
                                         Cancel
                                     </button>
                                     <div>
                                         {camp.status === "confirmed" && camp.paymentstatus === "paid" ? (
                                             <button
-                                                className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"
+                                                className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 cursor-pointer transition duration-300"
                                                 onClick={() => setModalOpen(true)} // Open the modal
                                             >
                                                 Feedback

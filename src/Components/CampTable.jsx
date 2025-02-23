@@ -20,10 +20,10 @@ const CampTable = ({ camp }) => {
                         <td className="py-2 px-4 border-b">{camp.location}</td>
                         <td className="py-2 px-4 border-b">{camp.healthcareProfessionalName}</td>
                         <td className="py-2 px-4 border-b">
-                            <button className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600">
+                            <button className="bg-blue-500 text-white py-1 cursor-pointer px-3 rounded hover:bg-blue-600">
                                 Update
                             </button>
-                            <button onClick={() => handleDelete(camp._id)} className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 ml-2">
+                            <button onClick={() => handleDelete(camp._id)} className="bg-red-500 cursor-pointer text-white py-1 px-3 rounded hover:bg-red-600 ml-2">
                                 Delete
                             </button>
                         </td>

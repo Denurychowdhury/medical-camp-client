@@ -38,7 +38,7 @@ const Camp = ({ camp }) => {
                     <div className="mt-4">
                         <Link
                             to={`/details/${camp._id}`}
-                            className="block w-full text-center px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+                            className="block w-full cursor-pointer text-center px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
                         >
                             View Details
                         </Link>
