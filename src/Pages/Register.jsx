@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { authcontext } from '../Authprovider/Authprovider';
 import { FaGoogle } from "react-icons/fa";
+import { Helmet } from 'react-helmet';
 
 const Register = () => {
     const { user, setUser, registerUser, setLoading, updateuserprofile, signinwithGoogle } = useContext(authcontext)
@@ -90,6 +91,12 @@ const Register = () => {
     };
     return (
         <div className="flex justify-center items-center h-screen bg-gray-100">
+            <div>
+                <Helmet>
+                    <title>Medical camp pro/register</title>
+                    <meta name="description" content="Nested component" />
+                </Helmet>
+            </div>
             <div className="bg-white p-8 rounded-lg shadow-lg w-full sm:w-96">
                 <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">Create an Account</h2>
 
