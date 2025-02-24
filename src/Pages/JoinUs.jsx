@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { authcontext } from '../Authprovider/Authprovider';
+import { FaGoogle } from "react-icons/fa";
 
 const JoinUs = () => {
     const { user, setUser, signinuser, signinwithGoogle, setLoading } = useContext(authcontext);
@@ -82,7 +83,7 @@ const JoinUs = () => {
                     </button>
                 </form>
                 <div>
-                    <button onClick={handlegooglesignin}>sing in google</button>
+                    <button className='cursor-pointer mt-2 border border-gray-300 p-2 rounded-lg bg-blue-600 text-white flex items-center gap-2' onClick={handlegooglesignin}>sing in google <FaGoogle /> </button>
                 </div>
                 <div className="flex justify-between items-center mt-4">
                     <a href="/forgot-password" className="text-sm text-blue-600 hover:underline">

@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { authcontext } from '../Authprovider/Authprovider';
+import { FaGoogle } from "react-icons/fa";
 
 const Register = () => {
     const { user, setUser, registerUser, setLoading, updateuserprofile, signinwithGoogle } = useContext(authcontext)
@@ -130,7 +131,7 @@ const Register = () => {
                 </form>
 
                 <div>
-                    <button onClick={handlegooglesignin}>Sign in google</button>
+                    <button onClick={handlegooglesignin} className='cursor-pointer mt-2 border border-gray-300 p-2 rounded-lg bg-blue-600 text-white flex items-center gap-2'>Sign in google <FaGoogle /></button>
                 </div>
 
                 <div className="flex justify-between items-center mt-4">
