@@ -1,56 +1,57 @@
 import React, { useState, useContext } from 'react';
 import { authcontext } from '../Authprovider/Authprovider';
 import { Helmet } from 'react-helmet';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const { user, updateuserprofile } = useContext(authcontext);
+    const { user, updateuserprofile, setUser, setLoading } = useContext(authcontext);
+    const navigate = useNavigate()
 
-    const [profileData, setProfileData] = useState({
-        name: user?.displayName || "",
-        photo: user?.photoURL || "",
-        contact: "",
-    });
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setProfileData((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
-    };
 
     const updateProfile = async (e) => {
         e.preventDefault();
+        setLoading(true); // Show loading state if needed
+
+        const name = e.target.name.value;
+        const photo = e.target.photo.value;
+        const info = {
+            displayName: name,
+            photoURL: photo,
+        };
+
         try {
-            await updateuserprofile({
-                displayName: profileData.name,
-                photoURL: profileData.photo,
-            });
-            console.log("Profile updated successfully");
-            setIsModalOpen(false);
+            await updateuserprofile(info); // Ensure Firebase updates first
+            setUser((prevUser) => ({
+                ...prevUser,
+                displayName: name, // Correct state update
+                photoURL: photo,
+            }));
+            setIsModalOpen(false); // Close modal after update
         } catch (error) {
-            console.error("Failed to update profile:", error);
+            console.error("Profile update failed:", error);
+        } finally {
+            setLoading(false); // Hide loading state
         }
     };
+
 
     return (
         <div>
             <div className="flex-1 p-8">
                 <div>
                     <Helmet>
-                        <title>{`Medical camp pro/${profileData.name}`}</title>
-                        <meta name="description" content="Nested component" />
+                        <title>{`Medical camp pro/${user.displayName}`}</title>
                     </Helmet>
                 </div>
                 <h2 className="text-xl font-bold mb-4">Organizer Profile</h2>
                 <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
                     <img
-                        src={profileData.photo || "https://via.placeholder.com/150"}
+                        src={user?.photoURL || "https://via.placeholder.com/150"}
                         alt="Profile"
                         className="w-24 h-24 rounded-full mb-4 border-2 border-gray-300"
                     />
-                    <p className="text-lg font-semibold text-gray-800">{profileData.name || "No Name Provided"}</p>
+                    <p className="text-lg font-semibold text-gray-800">{user?.displayName || "No Name Provided"}</p>
                     <button
                         onClick={() => setIsModalOpen(true)}
                         className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out"
@@ -61,42 +62,35 @@ const Profile = () => {
             </div>
 
             {/* Modal */}
+
             {isModalOpen && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-                        <h2 className="text-xl font-bold mb-4">Update Profile</h2>
-                        <form onSubmit={updateProfile}>
-                            <div className="mb-4">
-                                <label className="block text-gray-700 font-medium">Name</label>
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-md p-4">
+                    <div className="bg-white/80 p-6 rounded-2xl shadow-xl w-full max-w-md transform transition-all duration-300 scale-100">
+                        <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">Update Profile</h2>
+
+                        <form onSubmit={updateProfile} className="space-y-4">
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-1">Name</label>
                                 <input
                                     name="name"
                                     type="text"
-                                    value={profileData.name}
-                                    onChange={handleInputChange}
-                                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                    defaultValue={user?.displayName}
+                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
                                 />
                             </div>
-                            <div className="mb-4">
-                                <label className="block text-gray-700 font-medium">Image URL</label>
+
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-1">Image URL</label>
                                 <input
                                     name="photo"
                                     type="text"
-                                    value={profileData.photo}
-                                    onChange={handleInputChange}
-                                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                    defaultValue={user?.photoURL}
+                                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
                                 />
                             </div>
-                            <div className="mb-4">
-                                <label className="block text-gray-700 font-medium">Contact</label>
-                                <input
-                                    name="contact"
-                                    type="text"
-                                    value={profileData.contact}
-                                    onChange={handleInputChange}
-                                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                                />
-                            </div>
-                            <div className="flex justify-end space-x-2">
+
+                            {/* Buttons */}
+                            <div className="flex justify-between items-center">
                                 <button
                                     type="button"
                                     onClick={() => setIsModalOpen(false)}
@@ -106,14 +100,15 @@ const Profile = () => {
                                 </button>
                                 <button
                                     type="submit"
-                                    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300 ease-in-out"
+                                    className="px-6 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out shadow-md"
                                 >
-                                    Save
+                                    Save Changes
                                 </button>
                             </div>
                         </form>
                     </div>
                 </div>
+
             )}
         </div>
     );
