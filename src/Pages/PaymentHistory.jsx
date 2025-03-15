@@ -6,6 +6,7 @@ const PaymentHistory = () => {
     const { user } = useContext(authcontext)
     const axiospublic = useAxiosPublic()
     const [paymentHistory, setPayhistory] = useState([])
+
     useEffect(() => {
         if (user?.email) {
             axiospublic.get(`/payment/history/${user.email}`)
@@ -18,56 +19,59 @@ const PaymentHistory = () => {
                 });
         }
     }, [user, axiospublic]);
+
     return (
-        <div className="container mx-auto md:mt-8 mt-3">
-            <h2 className="text-2xl font-bold mb-4">Payment History</h2>
-            <div className="overflow-x-auto">
-                <table className="table-auto w-full border-collapse border border-gray-300">
-                    <thead className="bg-gray-200">
-                        <tr>
-                            <th className="p-3 border border-gray-300">Camp Name</th>
-                            <th className="p-3 border border-gray-300">Camp Fees</th>
-                            <th className="p-3 border border-gray-300">Payment Status</th>
-                            <th className="p-3 border border-gray-300">Confirmation Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {paymentHistory.length > 0 ? (
-                            paymentHistory.map((payment) => (
-                                <tr key={payment._id} className="text-center">
-                                    <td className="p-3 border border-gray-300">{payment.campName}</td>
-                                    <td className="p-3 border border-gray-300">${payment.price}</td>
-                                    <td className="p-3 border border-gray-300">
-                                        <span
-                                            className={`px-2 py-1 rounded-full ${payment.paymentstatus === "Paid"
-                                                ? "bg-green-200 text-green-800"
-                                                : "bg-red-200 text-red-800"
-                                                }`}
-                                        >
-                                            {payment.paymentstatus}
-                                        </span>
-                                    </td>
-                                    <td className="p-3 border border-gray-300">
-                                        <span
-                                            className={`px-2 py-1 rounded-full ${payment.confirmationStatus === "Confirmed"
-                                                ? "bg-green-200 text-green-800"
-                                                : "bg-yellow-200 text-yellow-800"
-                                                }`}
-                                        >
-                                            {payment.confirmstatus}
-                                        </span>
+        <div className="container mx-auto md:mt-8 mt-4 px-4">
+            <div className="bg-white shadow-lg rounded-lg p-6">
+                <h2 className="text-3xl font-semibold text-gray-800 mb-6">Payment History</h2>
+                <div className="overflow-x-auto rounded-lg shadow-md">
+                    <table className="table-auto w-full border-collapse text-sm text-gray-700">
+                        <thead className="bg-indigo-600 text-white">
+                            <tr>
+                                <th className="p-4 text-left border-b">Camp Name</th>
+                                <th className="p-4 text-right border-b">Camp Fees</th>
+                                <th className="p-4 text-center border-b">Payment Status</th>
+                                <th className="p-4 text-center border-b">Confirmation Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {paymentHistory.length > 0 ? (
+                                paymentHistory.map((payment) => (
+                                    <tr key={payment._id} className="hover:bg-gray-100 transition duration-300">
+                                        <td className="p-4 text-left border-b">{payment.campName}</td>
+                                        <td className="p-4 text-right border-b">${payment.price}</td>
+                                        <td className="p-4 text-center border-b">
+                                            <span
+                                                className={`px-3 py-1 rounded-full font-medium ${payment.paymentstatus === "Paid"
+                                                    ? "bg-green-100 text-green-700"
+                                                    : "bg-red-100 text-red-700"
+                                                    }`}
+                                            >
+                                                {payment.paymentstatus}
+                                            </span>
+                                        </td>
+                                        <td className="p-4 text-center border-b">
+                                            <span
+                                                className={`px-3 py-1 rounded-full font-medium ${payment.confirmationStatus === "Confirmed"
+                                                    ? "bg-green-100 text-green-700"
+                                                    : "bg-yellow-100 text-yellow-700"
+                                                    }`}
+                                            >
+                                                {payment.confirmstatus}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="4" className="p-4 text-center text-gray-500">
+                                        No payment history found.
                                     </td>
                                 </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td colSpan="4" className="p-3 text-center text-gray-500">
-                                    No payment history found.
-                                </td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     );

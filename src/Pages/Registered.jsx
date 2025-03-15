@@ -84,8 +84,14 @@ const Registered = () => {
                             <td className="p-4">{camp.participantName}</td>
                             <td className="p-4">
                                 <Link to={`/dashboard/pay/${camp._id}`}>
-                                    <button disabled={camp.paymentstatus == 'paid'} className='bg-amber-300 text-blue-400 p-2 text-xl'>
-                                        {camp.paymentstatus == 'paid' ? 'paid' : 'Pay'}
+                                    <button
+                                        disabled={camp.paymentstatus === 'paid'}
+                                        className={`${camp.paymentstatus === 'paid'
+                                            ? 'bg-green-500 text-white cursor-not-allowed'
+                                            : 'bg-amber-500 text-white hover:bg-amber-600 active:bg-amber-700 transition duration-200'
+                                            } p-3 rounded-lg text-xl font-semibold shadow-lg focus:outline-none`}
+                                    >
+                                        {camp.paymentstatus === 'paid' ? 'Paid' : 'Pay'}
                                     </button>
                                 </Link>
                             </td>

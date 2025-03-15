@@ -74,7 +74,7 @@ const AddCamp = () => {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
-                    toast.success('successfully submited')
+                    toast.success('Successfully submitted');
                 })
             actions.resetForm(); // Reset form on success
         } catch (error) {
@@ -85,65 +85,82 @@ const AddCamp = () => {
     };
 
     return (
-        <div className="flex-1 md:p-8 p-2">
-            <div>
+        <div className="flex justify-center items-center min-h-screen bg-gray-50 py-10">
+            <div className="w-full max-w-4xl bg-white p-10 rounded-lg shadow-lg border border-gray-200">
                 <Helmet>
-                    <title>Medical camp pro/Add camp</title>
-                    <meta name="description" content="Nested component" />
+                    <title>Medical Camp Pro | Add Camp</title>
+                    <meta name="description" content="Add a new health camp to the platform" />
                 </Helmet>
+
+                <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Add a New Health Camp</h2>
+
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={handleSubmit}
+                >
+                    {({ setFieldValue, isSubmitting }) => (
+                        <Form>
+                            {/* Two Column Grid Layout */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <InputField label="Camp Name" name="campName" type="text" />
+                                <FileField label="Camp Image" name="image" setFieldValue={setFieldValue} />
+
+                                <InputField label="Camp Fees ($)" name="campFees" type="number" />
+                                <InputField label="Date & Time" name="date" type="datetime-local" />
+
+                                <InputField label="Location" name="location" type="text" />
+                                <InputField label="Healthcare Professional Name" name="healthcareProfessionalName" type="text" />
+
+                                <InputField
+                                    label="Participant Count"
+                                    name="participantCount"
+                                    type="number"
+                                    value={0}
+                                    disabled
+                                />
+                            </div>
+
+                            {/* Full-width Text Area */}
+                            <div className="mt-6">
+                                <TextAreaField label="Description" name="description" />
+                            </div>
+
+                            {/* Submit Button */}
+                            <button
+                                type="submit"
+                                className="w-full mt-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition duration-300"
+                                disabled={isSubmitting}
+                            >
+                                {isSubmitting ? "Submitting..." : "Submit"}
+                            </button>
+                        </Form>
+                    )}
+                </Formik>
             </div>
-            <h2 className="text-xl font-bold mb-4">Add a New Health Camp</h2>
-
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={handleSubmit}
-            >
-                {({ setFieldValue, isSubmitting }) => (
-                    <Form className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md">
-                        <InputField label="Camp Name" name="campName" type="text" />
-                        <FileField label="Camp Image" name="image" setFieldValue={setFieldValue} />
-                        <InputField label="Camp Fees ($)" name="campFees" type="number" />
-                        <InputField label="Date & Time" name="date" type="datetime-local" />
-                        <InputField label="Location" name="location" type="text" />
-                        <InputField label="Healthcare Professional Name" name="healthcareProfessionalName" type="text" />
-                        <InputField
-                            label="Participant Count"
-                            name="participantCount"
-                            type="number"
-                            value={0}
-                            disabled
-                        />
-                        <TextAreaField label="Description" name="description" />
-
-                        <button
-                            type="submit"
-                            className="w-full py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300"
-                            disabled={isSubmitting}
-                        >
-                            {isSubmitting ? "Submitting..." : "Submit"}
-                        </button>
-                    </Form>
-                )}
-            </Formik>
         </div>
     );
 };
 
-
+// Input Field Component
 const InputField = ({ label, name, type }) => (
-    <div className="mb-6">
+    <div>
         <label className="block text-gray-700 font-medium mb-2" htmlFor={name}>
             {label}
         </label>
-        <Field type={type} id={name} name={name} className="w-full px-4 py-3 border border-blue-300 rounded-md focus:ring-2 focus:ring-blue-500" />
+        <Field
+            type={type}
+            id={name}
+            name={name}
+            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition duration-200"
+        />
         <ErrorMessage name={name} component="div" className="text-red-500 text-sm mt-1" />
     </div>
 );
 
-
+// File Input Component
 const FileField = ({ label, name, setFieldValue }) => (
-    <div className="mb-6">
+    <div>
         <label className="block text-gray-700 font-medium mb-2" htmlFor={name}>
             {label}
         </label>
@@ -151,19 +168,24 @@ const FileField = ({ label, name, setFieldValue }) => (
             type="file"
             id={name}
             onChange={(event) => setFieldValue(name, event.currentTarget.files[0])}
-            className="w-full px-4 py-3 border border-blue-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition duration-200"
         />
         <ErrorMessage name={name} component="div" className="text-red-500 text-sm mt-1" />
     </div>
 );
 
-
+// Text Area Component
 const TextAreaField = ({ label, name }) => (
-    <div className="mb-6">
+    <div>
         <label className="block text-gray-700 font-medium mb-2" htmlFor={name}>
             {label}
         </label>
-        <Field as="textarea" id={name} name={name} className="w-full px-4 py-3 border border-blue-300 rounded-md focus:ring-2 focus:ring-blue-500" />
+        <Field
+            as="textarea"
+            id={name}
+            name={name}
+            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition duration-200"
+        />
         <ErrorMessage name={name} component="div" className="text-red-500 text-sm mt-1" />
     </div>
 );

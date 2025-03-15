@@ -1,17 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { authcontext } from '../Authprovider/Authprovider';
 import { Helmet } from 'react-helmet';
-import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { user, updateuserprofile, setUser, setLoading } = useContext(authcontext);
-    const navigate = useNavigate()
-
 
     const updateProfile = async (e) => {
         e.preventDefault();
-        setLoading(true); // Show loading state if needed
+        setLoading(true); // Show loading state
 
         const name = e.target.name.value;
         const photo = e.target.photo.value;
@@ -21,52 +18,85 @@ const Profile = () => {
         };
 
         try {
-            await updateuserprofile(info); // Ensure Firebase updates first
+            await updateuserprofile(info); // Update Firebase user profile
             setUser((prevUser) => ({
                 ...prevUser,
-                displayName: name, // Correct state update
+                displayName: name,
                 photoURL: photo,
             }));
             setIsModalOpen(false); // Close modal after update
         } catch (error) {
-            console.error("Profile update failed:", error);
+            console.error('Profile update failed:', error);
         } finally {
             setLoading(false); // Hide loading state
         }
     };
 
-
     return (
-        <div>
-            <div className="flex-1 p-8">
-                <div>
-                    <Helmet>
-                        <title>{`Medical camp pro/${user.displayName}`}</title>
-                    </Helmet>
-                </div>
-                <h2 className="text-xl font-bold mb-4">Organizer Profile</h2>
-                <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
-                    <img
-                        src={user?.photoURL || "https://via.placeholder.com/150"}
-                        alt="Profile"
-                        className="w-24 h-24 rounded-full mb-4 border-2 border-gray-300"
-                    />
-                    <p className="text-lg font-semibold text-gray-800">{user?.displayName || "No Name Provided"}</p>
+        <div className="bg-gray-100 min-h-screen flex flex-col items-center">
+            <Helmet>
+                <title>{`Medical Camp Pro - ${user?.displayName || 'Profile'}`}</title>
+            </Helmet>
+
+            {/* Profile Card */}
+            <div className="w-full max-w-4xl bg-white shadow-lg rounded-xl mt-6 p-6 md:p-8">
+                <div className="flex flex-col md:flex-row items-center justify-between mb-6">
+                    {/* Profile Image and Info */}
+                    <div className="flex flex-col md:flex-row items-center space-x-6">
+                        <div className="w-32 h-32 rounded-full border-4 border-white shadow-md mb-4 md:mb-0">
+                            <img
+                                src={user?.photoURL || 'https://via.placeholder.com/150'}
+                                alt="Profile"
+                                className="w-full h-full rounded-full object-cover"
+                            />
+                        </div>
+                        <div>
+                            <h2 className="text-3xl font-bold text-gray-800">{user?.displayName || 'No Name Provided'}</h2>
+                            <p className="text-md text-gray-600">{user?.email || 'No Email Provided'}</p>
+                        </div>
+                    </div>
+
+                    {/* Update Button */}
                     <button
                         onClick={() => setIsModalOpen(true)}
-                        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out"
+                        className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out mt-4 md:mt-0"
                     >
-                        Update
+                        Update Profile
                     </button>
+                </div>
+
+                {/* Profile Information Sections */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="bg-gray-50 p-6 rounded-lg shadow-md">
+                        <h3 className="text-xl font-semibold text-gray-800 mb-4">About</h3>
+                        <div className="flex justify-between">
+                            <span className="text-gray-700 font-medium">UID:</span>
+                            <span className="text-gray-600">{user?.uid || 'No UID Provided'}</span>
+                        </div>
+                        <div className="flex justify-between mt-4">
+                            <span className="text-gray-700 font-medium">Account Created:</span>
+                            <span className="text-gray-600">{user?.metadata?.creationTime || 'No Info'}</span>
+                        </div>
+                        <div className="flex justify-between mt-4">
+                            <span className="text-gray-700 font-medium">Last Sign-In:</span>
+                            <span className="text-gray-600">{user?.metadata?.lastSignInTime || 'No Info'}</span>
+                        </div>
+                    </div>
+
+                    {/* Add more sections like 'Activity' */}
+                    <div className="bg-gray-50 p-6 rounded-lg shadow-md">
+                        <h3 className="text-xl font-semibold text-gray-800 mb-4">Recent Activity</h3>
+                        {/* Placeholder for activity details, can be customized */}
+                        <p className="text-gray-600">No activity data available</p>
+                    </div>
                 </div>
             </div>
 
-            {/* Modal */}
-
+            {/* Modal for Profile Update */}
             {isModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-md p-4">
-                    <div className="bg-white/80 p-6 rounded-2xl shadow-xl w-full max-w-md transform transition-all duration-300 scale-100">
-                        <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">Update Profile</h2>
+                    <div className="bg-white p-6 rounded-xl shadow-xl w-full max-w-md transform transition-all duration-300 scale-100">
+                        <h2 className="text-2xl font-semibold text-gray-800 text-center mb-6">Update Profile</h2>
 
                         <form onSubmit={updateProfile} className="space-y-4">
                             <div>
@@ -89,7 +119,7 @@ const Profile = () => {
                                 />
                             </div>
 
-                            {/* Buttons */}
+                            {/* Action Buttons */}
                             <div className="flex justify-between items-center">
                                 <button
                                     type="button"
@@ -108,7 +138,6 @@ const Profile = () => {
                         </form>
                     </div>
                 </div>
-
             )}
         </div>
     );

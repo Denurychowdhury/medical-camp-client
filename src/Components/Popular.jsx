@@ -7,44 +7,45 @@ const Popular = () => {
 
     useEffect(() => {
         axios.get('https://medical-camp-server-nine.vercel.app/homecamps')
-            .then(data => {
-                setPopularCamps(data.data)
-            })
+            .then(response => setPopularCamps(response.data))
+            .catch(error => console.error("Error fetching camps:", error));
     }, []);
 
     return (
-        <div className="container mx-auto p-6">
-            <h2 className="text-2xl font-bold mb-4">Popular Medical Camps</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="container mx-auto px-6 py-12">
+            <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
+                Popular Medical Camps
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                 {popularCamps.map((camp) => (
                     <div
                         key={camp._id}
-                        className="rounded-2xl overflow-hidden shadow-lg border transform transition-transform hover:scale-105"
+                        className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl"
                     >
                         <img
                             src={camp.image}
                             alt={camp.name}
-                            className="w-full h-40 object-cover"
+                            className="w-full h-48 object-cover"
                         />
-                        <div className="p-4">
-                            <h3 className="text-lg font-semibold">{camp.name}</h3>
-                            <p className="text-sm text-gray-600">Fees: ${camp.campFees}</p>
-                            <p className="text-sm text-gray-600">Date: {camp.date}</p>
-                            <p className="text-sm text-gray-600">Location: {camp.location}</p>
-                            <p className="text-sm text-gray-600">Healthcare Professional: {camp.healthcareProfessionalName}</p>
-                            <p className="text-sm font-bold text-blue-600">
-                                Participants: {camp.participantCount}
-                            </p>
-                            <button className='p-3 rounded-b-md bg-blue-600'>
-                                <Link to={`/details/${camp._id}`}>Details</Link>
-                            </button>
+                        <div className="p-5">
+                            <h3 className="text-xl font-semibold text-gray-900 mb-2">{camp.name}</h3>
+                            <p className="text-gray-600 text-sm">Fees: <span className="font-medium text-gray-800">${camp.campFees}</span></p>
+                            <p className="text-gray-600 text-sm">Date: <span className="font-medium text-gray-800">{camp.date}</span></p>
+                            <p className="text-gray-600 text-sm">Location: <span className="font-medium text-gray-800">{camp.location}</span></p>
+                            <p className="text-gray-600 text-sm">Healthcare Professional: <span className="font-medium text-gray-800">{camp.healthcareProfessionalName}</span></p>
+                            <p className="text-blue-600 font-semibold text-sm mt-2">Participants: {camp.participantCount}</p>
+                            <Link to={`/details/${camp._id}`}>
+                                <button className="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    View Details
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 ))}
             </div>
-            <div className="mt-6 flex justify-center">
+            <div className="mt-10 flex justify-center">
                 <Link to="/available">
-                    <button className="px-6 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+                    <button className="px-6 py-3 text-white bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg shadow-md hover:opacity-90 transition-all">
                         See All Camps
                     </button>
                 </Link>
