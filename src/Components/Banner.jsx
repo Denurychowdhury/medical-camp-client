@@ -15,7 +15,7 @@ const Banner = () => {
         {
             title: "Healing Communities Together",
             description: "Collaboration with local volunteers to deliver impactful care.",
-            image: "/images/health3.jpg",
+            image: "/images/gambia.png",
         },
     ];
 
