@@ -55,7 +55,7 @@ const JoinUs = () => {
             setPassword('Denuryvai');
         } else if (role === 'organizer') {
             setEmail('denuryc@gmail.com');
-            setPassword('Denuryvai');
+            setPassword('Denuryc@gmail.com');
         }
     };
 

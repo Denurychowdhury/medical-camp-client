@@ -2,7 +2,7 @@
 
 ## Organizers username : denuryc@gmail.com
 
-## password :Denuryvai
+## password :Denuryc@gmail.com
 
 # Live site url: https://medical-camp-pro.web.app/
 
